@@ -1,3 +1,7 @@
+/* always start at the top on load/reload (unless a #anchor is targeted) */
+if('scrollRestoration' in history)history.scrollRestoration='manual';
+(()=>{const nav=performance.getEntriesByType&&performance.getEntriesByType('navigation')[0];if(nav&&nav.type==='reload'&&location.hash)history.replaceState(null,'',location.pathname+location.search);if(location.hash)return;let user=false;['wheel','touchstart','keydown'].forEach(ev=>addEventListener(ev,()=>user=true,{once:true,passive:true}));const top=()=>{if(!user&&!location.hash)window.scrollTo(0,0)};top();addEventListener('DOMContentLoaded',top);addEventListener('load',()=>{top();requestAnimationFrame(top);setTimeout(top,120);setTimeout(top,400)});addEventListener('pageshow',e=>{if(e.persisted)top()})})();
+
 /* rein-digital · Redesign v2 · shared behaviour */
 (function(){
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];

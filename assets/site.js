@@ -99,9 +99,6 @@ $$('svg.gears').forEach(svg=>{
   const tick=()=>{base+=.12;const r=svg.parentElement.getBoundingClientRect();const sc=(innerHeight-r.top)*.12;gs.forEach((g,i)=>g.style.transform=`rotate(${(base+sc)*G[i][5]}deg)`);requestAnimationFrame(tick)};tick();
 });
 
-/* ---- logo watermark: turns slowly, like the gears ---- */
-$$('.logo-bg').forEach(el=>{let base=0;const t=()=>{base+=.04;const r=el.parentElement.getBoundingClientRect();el.style.transform=`rotate(${base+(innerHeight-r.top)*.04}deg)`;requestAnimationFrame(t)};t()});
-
 /* ---- floating talk button ---- */
 const fab=$('.talk-fab');
 if(fab){const hide=$$('#termin,#check');const upd=()=>{const past=scrollY>innerHeight*.7;const inBook=hide.some(t=>{const r=t.getBoundingClientRect();return r.top<innerHeight&&r.bottom>0});fab.classList.toggle('show',past&&!inBook)};addEventListener('scroll',upd,{passive:true});upd()}

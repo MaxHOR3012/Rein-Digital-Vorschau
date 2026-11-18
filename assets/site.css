@@ -558,3 +558,16 @@ body.menu-open .talk-fab{display:none}
   .values .stat b{font-size:1.6rem}
   .values .stat span{margin-top:6px}
 }
+
+/* Calendly embed */
+.cal-gate{display:flex;flex-direction:column;flex:1}
+.cal-body{flex:1;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:16px;padding:clamp(24px,4vw,48px)}
+.cal-ico{color:var(--blue)}
+.cal-body h3{font-size:clamp(1.4rem,2.2vw,1.9rem);line-height:1.15;max-width:18ch}
+.cal-body p{color:var(--ink-soft);max-width:44ch}
+.cal-note{font-size:.78rem;line-height:1.5;margin-top:6px}
+.cal-note a{color:var(--blue)}
+.booker.cal.loaded{background:#fff}
+.cal-frame{flex:none;position:relative;min-width:300px;height:720px}
+.cal-frame iframe{position:absolute;inset:0;width:100%!important;height:100%!important;border:0;display:block}
+@media (max-width:900px){.cal-frame{height:820px}}

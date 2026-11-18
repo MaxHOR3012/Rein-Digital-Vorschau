@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=Instrument+Sans:wght@400;500;600&family=Chivo+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=23">
+<link rel="stylesheet" href="assets/site.css?v=27">
 </head>
 <body>
 
@@ -300,9 +300,19 @@
       </ul>
       <figure class="book-me"><img src="assets/img/p6.jpg" alt="Dr. Andreas Rein"><figcaption><b>Andreas Rein</b><span>Du buchst direkt in meinen Kalender.</span></figcaption></figure>
     </div>
-    <div class="booker rv" id="booker" aria-live="polite"></div>
+    <div class="booker cal rv" id="cal" data-url="https://calendly.com/rein-digital/kontakt">
+      <div class="cal-gate">
+        <div class="bk-steps"><span class="on">Kennenlernen</span><span>20 Min.</span><span>Video · Telefon · vor Ort</span></div>
+        <div class="cal-body">
+          <div class="cal-ico" aria-hidden="true"><svg viewBox="0 0 48 48" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="10" width="36" height="32"/><path d="M6 19h36M16 6v8M32 6v8"/><path d="M17 29l5 5 9-10" stroke-width="2.6"/></svg></div>
+          <h3>Such Dir einen Termin aus, der Dir passt.</h3>
+          <p>Du siehst meine freien Zeiten und buchst direkt in meinen Kalender. Du bekommst sofort eine Bestätigung mit Kalendereinladung.</p>
+          <button class="btn primary" type="button" id="calLoad">Kalender laden <span class="arr">→</span></button>
+          <p class="cal-note">Beim Laden wird eine Verbindung zu Calendly (USA) hergestellt. Mehr dazu in den <a href="https://www.rein-digital.com/datenschutzerklarung/">Datenschutzhinweisen</a>. Lieber direkt? <a href="https://calendly.com/rein-digital/kontakt" target="_blank" rel="noopener">Termin auf Calendly öffnen ↗</a></p>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="wrap"><p class="demo-note">Prototyp: Buchungen werden hier nur in diesem Browser gespeichert. <button id="demoReset" type="button">Demo zurücksetzen</button></p></div>
 </section>
 </main>
 
@@ -317,6 +327,6 @@
   </div>
 </footer>
 <a class="talk-fab" href="index.html#termin" aria-label="Termin buchen"><img src="assets/img/p2.jpg" alt=""><span>Lass uns reden</span></a>
-<script src="assets/site.js?v=23"></script>
+<script src="assets/site.js?v=27"></script>
 </body>
 </html>

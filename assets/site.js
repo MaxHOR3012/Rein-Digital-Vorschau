@@ -100,9 +100,11 @@ if(fab){const hide=$$('#termin,#check');const upd=()=>{const past=scrollY>innerH
 /* ---- Calendly (two-click: loads only after consent click) ---- */
 const cal=$('#cal');
 if(cal){const load=()=>{if(cal.classList.contains('loaded'))return;cal.classList.add('loaded');
-  const u=cal.dataset.url+'?hide_gdpr_banner=1&hide_landing_page_details=1&primary_color=177ec2&text_color=0e1b2e';
-  cal.innerHTML='<div class="cal-frame calendly-inline-widget" data-url="'+u+'"></div>';
-  const sc=document.createElement('script');sc.src='https://assets.calendly.com/assets/external/widget.js';sc.async=true;document.body.appendChild(sc);
+  const u=cal.dataset.url+'?embed_domain='+encodeURIComponent(location.host||'localhost')+'&embed_type=Inline&hide_gdpr_banner=1&hide_landing_page_details=1&primary_color=177ec2&text_color=0e1b2e';
+  cal.innerHTML='<div class="cal-frame"><div class="cal-wait">Kalender wird geladen …</div><iframe src="'+u+'" title="Termin mit Dr. Andreas Rein buchen"></iframe></div>';
+  const fr=$('.cal-frame',cal);$('iframe',cal).addEventListener('load',()=>fr.classList.add('ready'));
+  addEventListener('message',e=>{if(!/calendly\.com$/.test(new URL(e.origin).hostname))return;const d=e.data||{};
+    if(d.event==='calendly.page_height'){const h=parseInt(d.payload&&d.payload.height,10);if(h>300)fr.style.height=(h+10)+'px';fr.classList.add('ready')}});
   try{sessionStorage.setItem('rd-cal','1')}catch(e){}};
   const btn=$('#calLoad');if(btn)btn.onclick=load;
   try{if(sessionStorage.getItem('rd-cal'))load()}catch(e){}

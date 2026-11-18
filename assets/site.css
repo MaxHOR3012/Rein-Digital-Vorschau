@@ -755,3 +755,13 @@ body.menu-open .talk-fab{display:none}
 @media (min-width:901px){.temple-sticky .temple{max-width:400px}#ansatz .temple-col{padding-bottom:140px}#ansatz .logo-under{width:110px}.seg-wrap{margin-bottom:14px}}
 .logo-under{border-radius:0;overflow:visible}.logo-under img{width:100%;margin:0}
 .brand .mark img{width:100%;height:100%;margin:0}
+/* haltungsbasiert.org mark in the Substack card: monochrome, colour on hover */
+.substack{position:relative;overflow:hidden}
+.hbo-mark{position:absolute;right:clamp(20px,3vw,36px);bottom:clamp(20px,3vw,34px);width:clamp(110px,12vw,170px);aspect-ratio:520/294}
+.hbo-mark img{position:absolute;inset:0;width:100%;height:100%;transition:opacity .5s}
+.hbo-mark .m{opacity:.85}.hbo-mark .c{opacity:0}
+.substack:hover .hbo-mark .m{opacity:0}.substack:hover .hbo-mark .c{opacity:1}
+@media (max-width:520px){.hbo-mark{position:relative;right:auto;bottom:auto;align-self:flex-end;margin-top:4px;width:96px}}
+.substack-foot{margin-top:auto;width:100%;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px}
+.substack .substack-foot .btn{margin-top:0}
+.hbo-mark,.substack .hbo-mark{position:relative;right:auto;bottom:auto;margin:0;width:clamp(96px,11vw,150px)}

@@ -708,10 +708,13 @@ body.menu-open .talk-fab{display:none}
 }
 
 /* logo watermark (about) + gears running across the section edge */
-.logo-bg{position:absolute;left:-200px;bottom:-160px;width:min(640px,80vw);aspect-ratio:1;border-radius:50%;overflow:hidden;pointer-events:none;opacity:.08;z-index:0}
-.logo-bg img{width:125%;max-width:none;margin:-2.5% 0 0 -12.5%;filter:brightness(0) invert(1)}
 .about .wrap{position:relative;z-index:1}
 .steam .gears{z-index:0}
 .steam .wrap{position:relative;z-index:1}
-@media (max-width:900px){.logo-bg{left:-120px;bottom:-80px;width:380px}}
 .about + .steam{margin-top:-2px;padding-top:calc(clamp(80px,10vw,150px) + 2px)}
+
+/* logo watermark – bottom right of "Ansatz", overlapping into "Angebote" */
+.logo-bg{position:absolute;right:-110px;bottom:-200px;width:min(500px,70vw);aspect-ratio:1;border-radius:50%;overflow:hidden;pointer-events:none;opacity:.13;z-index:1}
+.logo-bg img{width:125%;max-width:none;margin:-2.5% 0 0 -12.5%}
+#ansatz .wrap,#angebote .wrap{position:relative;z-index:2}
+@media (max-width:900px){.logo-bg{right:-90px;bottom:-130px;width:300px}}

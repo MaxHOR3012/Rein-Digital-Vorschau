@@ -305,11 +305,11 @@ h3{font-size:clamp(1.3rem,1.8vw,1.65rem);letter-spacing:-.015em}
 }
 
 /* ---------- steampunk / books ---------- */
-.steam{background:var(--navy-d);color:var(--bg);overflow:hidden}
+.steam{background:var(--navy-d);color:var(--bg);overflow-x:clip;overflow-y:visible}
 .gears{position:absolute;pointer-events:none}
 .gears path{fill:none;stroke:var(--blue);stroke-width:1.4}
 .gears .g2 path{stroke:var(--blue-l)}
-.steam .gears{right:-140px;top:-80px;width:min(640px,72vw);opacity:.32}
+.steam .gears{right:-140px;top:-230px;width:min(640px,72vw);opacity:.32}
 .steam-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(30px,5vw,80px);align-items:center;position:relative}
 .steam h2{font-size:clamp(2.4rem,5vw,4.6rem)}
 .steam h2 b{color:var(--blue-l);font-weight:900}
@@ -706,3 +706,12 @@ body.menu-open .talk-fab{display:none}
   .mt{display:none}
   .befund .verdict{border-top:0;margin-top:0}
 }
+
+/* logo watermark (about) + gears running across the section edge */
+.logo-bg{position:absolute;left:-200px;bottom:-160px;width:min(640px,80vw);aspect-ratio:1;border-radius:50%;overflow:hidden;pointer-events:none;opacity:.08;z-index:0}
+.logo-bg img{width:125%;max-width:none;margin:-2.5% 0 0 -12.5%;filter:brightness(0) invert(1)}
+.about .wrap{position:relative;z-index:1}
+.steam .gears{z-index:0}
+.steam .wrap{position:relative;z-index:1}
+@media (max-width:900px){.logo-bg{left:-120px;bottom:-80px;width:380px}}
+.about + .steam{margin-top:-2px;padding-top:calc(clamp(80px,10vw,150px) + 2px)}

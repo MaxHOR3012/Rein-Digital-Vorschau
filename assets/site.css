@@ -719,3 +719,16 @@ body.menu-open .talk-fab{display:none}
 .temple-col .temple{max-width:100%}
 .logo-under{width:clamp(120px,14vw,170px);aspect-ratio:1;border-radius:50%;overflow:hidden;margin-top:18px;opacity:.55}
 .logo-under img{width:125%;max-width:none;margin:-2.5% 0 0 -12.5%}
+
+/* toggle sits on top of the pillars; both stay in view while scrolling */
+.seg-wrap{display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:22px}
+.seg-wrap .mono{color:var(--blue)}
+.seg-wrap .seg{margin-top:0;background:var(--white)}
+#ansatz .coh-grid{align-items:start}
+@media (min-width:901px){#ansatz .temple-col{align-self:stretch;justify-content:flex-start}.temple-sticky{position:sticky;top:calc(var(--hdr) + 20px)}}
+.temple-sticky{display:flex;flex-direction:column;align-items:center;width:100%}
+.logo-under{width:clamp(100px,10vw,130px);margin-top:10px}
+@media (min-width:901px){.temple-sticky .temple{max-width:460px}#ansatz .logo-under{margin-top:auto}}
+.navy .eyebrow,.dark .eyebrow{color:var(--bg)}
+.navy .eyebrow::before{background:var(--blue-l)}
+.navy .checks div,.dark .checks div{color:var(--bg)}

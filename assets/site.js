@@ -101,7 +101,7 @@ $$('svg.gears').forEach(svg=>{
 
 /* ---- floating talk button ---- */
 const fab=$('.talk-fab');
-if(fab){const hide=$$('#termin,#check');const upd=()=>{const past=scrollY>innerHeight*.7;const inBook=hide.some(t=>{const r=t.getBoundingClientRect();return r.top<innerHeight&&r.bottom>0});fab.classList.toggle('show',past&&!inBook)};addEventListener('scroll',upd,{passive:true});upd()}
+if(fab){const hide=$$('#termin,#check,#ansatz .temple-col');const upd=()=>{const past=scrollY>innerHeight*.7;const inBook=hide.some(t=>{const r=t.getBoundingClientRect();return r.top<innerHeight&&r.bottom>0});fab.classList.toggle('show',past&&!inBook)};addEventListener('scroll',upd,{passive:true});upd()}
 
 /* ---- Calendly (two-click: loads only after consent click) ---- */
 const cal=$('#cal');

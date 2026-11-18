@@ -749,3 +749,5 @@ body.menu-open .talk-fab{display:none}
 .legal-date{margin-top:30px!important;font-family:var(--f-mono);font-size:.75rem}
 @media (min-width:961px){.nav a,.nav .dd > button,.hdr .btn{white-space:nowrap}}
 @media (min-width:961px) and (max-width:1180px){.nav{gap:20px}.nav a,.nav .dd > button{font-size:.88rem}.hdr .wrap > .btn{padding:.8em 1.1em;font-size:.84rem}.hdr .wrap > .btn .arr{display:none}}
+/* mobile hero: portrait version of the flow lines (chaos left -> calm flow right) */
+@media (max-width:900px){.hero-bg{background-image:url("hero-flow-mobile.svg");background-size:100% auto;background-position:center top;background-repeat:no-repeat}.hero-bg::after{background:linear-gradient(180deg,rgba(246,247,249,.35) 0%,rgba(246,247,249,.55) 30%,rgba(246,247,249,.55) 55%,rgba(246,247,249,.15) 75%,rgba(246,247,249,0) 100%)}}

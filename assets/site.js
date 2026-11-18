@@ -15,7 +15,7 @@ $$('.nav a').forEach(a=>a.addEventListener('click',()=>document.body.classList.r
 /* ---- ticker ---- */
 const tk=$('#ticker');
 if(tk){
-  const pairs=[["Projektüberlastung","Transparenz"],["Widersprüchliche Prioritäten","Fokus"],["Informelle Absprachen","Klare Steuerung"],["Strategie auf Folien","Gelebte Realität"],["Meeting-Theater","Entscheidungen"],["Bauchgefühl","Messbare KPIs"]];
+  const pairs=[["Alles ist Prio 1","Klare Reihenfolge"],["Entscheidung vertagt","Entscheidung getroffen"],["Verantwortung auf dem Papier","Verantwortung im Verhalten"],["Framework eingeführt","Alltag verändert"],["Flurfunk","Besprechbarkeit"],["Uhrwerk","Organismus"]];
   const line=pairs.map(p=>`<s>${p[0]}</s> → <b>${p[1]}</b><span class="sep">✦</span>`).join('');
   tk.innerHTML=`<p>${line}${line}</p><p>${line}${line}</p>`;
 }
@@ -40,19 +40,18 @@ if(bt) bt.onclick=()=>{const b=$('#badges');const o=b.classList.toggle('all');bt
 const ct=$('.career-track');
 $$('.career-nav button').forEach(b=>b.onclick=()=>ct.scrollBy({left:(+b.dataset.d)*ct.clientWidth*.8,behavior:'smooth'}));
 
-/* ---- venn coherence ---- */
-const venn=$('#venn');
-if(venn){
-  const bs=$$('#cohSeg button');
-  bs.forEach(b=>b.onclick=()=>{venn.classList.toggle('apart',b.dataset.v==='apart');bs.forEach(x=>x.setAttribute('aria-pressed',x===b))});
+/* ---- three pillars ---- */
+const tp=$('#temple');
+if(tp){const bs=$$('#colSeg button');
+  bs.forEach(b=>b.onclick=()=>{tp.classList.toggle('two',b.dataset.v==='two');bs.forEach(x=>x.setAttribute('aria-pressed',x===b))});
 }
 
 /* ---- pulse check ---- */
 const qs=$('#qs');
 if(qs){
-  const Q=[["Bei uns ist fast jedes Projekt „Prio 1“.","p","Fluss"],["Wichtige Entscheidungen fallen oft informell – auf dem Flur oder per Chat.","d","Struktur"],["Führung ist überwiegend mit Feuerlöschen beschäftigt.","o","Haltung"],["Wir wissen nicht genau, wo unsere Kapazitäten gebunden sind.","o","Fluss"],["Die Strategie ist präsentiert, aber im Alltag kaum spürbar.","c","Haltung"],["Erfolg ist schwer messbar – KPIs fehlen oder sagen wenig.","p","Struktur"]];
+  const Q=[["Wir haben Scrum, OKR oder Kanban eingeführt – der Alltag ist trotzdem derselbe.","m","Methoden"],["Jede neue Initiative bringt ihr eigenes Framework mit.","m","Methoden"],["Zu viele Projekte laufen parallel, die Prioritäten sind unklar.","s","Strukturen"],["Entscheidungen werden vertagt – oder informell getroffen.","s","Strukturen"],["Verantwortung steht auf dem Papier, im Verhalten zeigt sie sich nicht.","h","Haltung"],["Über Fehler, Macht und Unsicherheit wird lieber nicht gesprochen.","h","Haltung"]];
   qs.innerHTML=Q.map(q=>`<label class="q"><input type="checkbox" data-k="${q[1]}" data-d="${q[2]}"><span>${q[0]}</span><em>${q[2]}</em></label>`).join('');
-  const REC={p:["Project Health Check","health-series.html#project"],d:["Department Health Check","health-series.html#department"],o:["Operational Relief & Steering","health-series.html#relief"],c:["Organisational Coherence Assessment","health-series.html#coherence"]};
+  const REC={m:["HBO-Diagnose","health-series.html"],s:["Steuerungssysteme","flow-steuerung.html"],h:["Führungsentwicklung & Coaching","haltung-fuehrung.html"],all:["HBO-Diagnose","health-series.html"]};
   const LC=['#0E1B2E','#177EC2','#D2553A','#B23A22'];
   const score=()=>{
     const ch=$$('.q input:checked'),n=ch.length,l=n===0?0:n<=2?1:n<=4?2:3,bf=$('#befund');
@@ -62,8 +61,8 @@ if(qs){
     const v=$('#verdict');
     if(!n){v.innerHTML='<h3>Noch alles ruhig.</h3><p>Hake ab, was Dir bekannt vorkommt.</p>';return}
     const cnt={};ch.forEach(c=>cnt[c.dataset.k]=(cnt[c.dataset.k]||0)+1);
-    const top=Object.entries(cnt).sort((a,b)=>b[1]-a[1])[0][0],r=REC[n>=5?'c':top];
-    v.innerHTML=`<h3>${['','Leicht erhöhter Puls.','Deutlich angespannt.','Zeit zu handeln.'][l]}</h3><p>Passt: <strong>${r[0]}</strong></p><a href="${r[1]}">Format ansehen →</a>`;
+    const top=Object.entries(cnt).sort((a,b)=>b[1]-a[1])[0][0],r=REC[n>=4||Object.keys(cnt).length===3?'all':top];
+    v.innerHTML=`<h3>${['','Leicht erhöhter Puls.','Deutlich angespannt.','Zeit zu handeln.'][l]}</h3><p>Naheliegender Einstieg: <strong>${r[0]}</strong></p><a href="${r[1]}">Angebot ansehen →</a>`;
   };
   $$('.q input').forEach(i=>i.onchange=score);score();
 }
@@ -108,6 +107,23 @@ if(cal){const load=()=>{if(cal.classList.contains('loaded'))return;cal.classList
   try{sessionStorage.setItem('rd-cal','1')}catch(e){}};
   const btn=$('#calLoad');if(btn)btn.onclick=load;
   try{if(sessionStorage.getItem('rd-cal'))load()}catch(e){}
+}
+
+/* ---- contact form ----
+   Live: set KEY to the Web3Forms access key (web3forms.com, free) – mails then go straight to Andreas.
+   Without a key the form opens the visitor's mail program with the message prefilled. */
+const cf=$('#contact');
+if(cf){const KEY='', TO='arein@rein-digital.com', msg=$('.contact-msg',cf);
+  cf.onsubmit=async e=>{e.preventDefault();const fd=new FormData(cf);
+    if(fd.get('botcheck'))return;
+    if(!fd.get('name').trim()||!/^\S+@\S+\.\S+$/.test(fd.get('email'))||!fd.get('message').trim()){msg.textContent='Bitte Name, gültige E-Mail und Dein Anliegen ausfüllen.';msg.className='contact-msg err';return}
+    if(!fd.get('ok')){msg.textContent='Bitte bestätige noch die Datenschutzhinweise.';msg.className='contact-msg err';return}
+    if(!KEY){location.href='mailto:'+TO+'?subject='+encodeURIComponent('Anfrage über die Website – '+fd.get('name'))+'&body='+encodeURIComponent(fd.get('message')+'\n\n'+fd.get('name')+'\n'+fd.get('email'));msg.textContent='Dein Mailprogramm öffnet sich mit Deiner Nachricht.';msg.className='contact-msg ok';return}
+    msg.textContent='Wird gesendet …';msg.className='contact-msg';
+    try{const r=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({access_key:KEY,subject:'Anfrage über rein-digital.com',from_name:fd.get('name'),name:fd.get('name'),email:fd.get('email'),message:fd.get('message')})});
+      const j=await r.json();if(!j.success)throw 0;cf.reset();msg.textContent='Danke! Deine Nachricht ist angekommen. Ich melde mich persönlich.';msg.className='contact-msg ok'}
+    catch(err){msg.innerHTML='Das hat nicht geklappt. Schreib mir gern direkt: <a href="mailto:'+TO+'">'+TO+'</a>';msg.className='contact-msg err'}
+  };
 }
 
 /* ---- reveal ---- */

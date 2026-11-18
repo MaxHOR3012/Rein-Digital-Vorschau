@@ -52,12 +52,19 @@ if(qs){
   const Q=[["Wir haben Scrum, OKR oder Kanban eingeführt – der Alltag ist trotzdem derselbe.","m","Methoden"],["Jede neue Initiative bringt ihr eigenes Framework mit.","m","Methoden"],["Zu viele Projekte laufen parallel, die Prioritäten sind unklar.","s","Strukturen"],["Entscheidungen werden vertagt – oder informell getroffen.","s","Strukturen"],["Verantwortung steht auf dem Papier, im Verhalten zeigt sie sich nicht.","h","Haltung"],["Über Fehler, Macht und Unsicherheit wird lieber nicht gesprochen.","h","Haltung"]];
   qs.innerHTML=Q.map(q=>`<label class="q"><input type="checkbox" data-k="${q[1]}" data-d="${q[2]}"><span>${q[0]}</span><em>${q[2]}</em></label>`).join('');
   const REC={m:["HBO-Diagnose","health-series.html"],s:["Steuerungssysteme","flow-steuerung.html"],h:["Führungsentwicklung & Coaching","haltung-fuehrung.html"],all:["HBO-Diagnose","health-series.html"]};
-  const LC=['#0E1B2E','#177EC2','#D2553A','#B23A22'];
+  const LC=['#F6F7F9','#7CC0EE','#E8835F','#E2603F'];
+  const mt=$('#mt');
+  const drawTemple=ch=>{if(!mt)return;const cols=$$('.mt-col',mt),H=[1,.62,.3],box=mt.getBoundingClientRect(),pts=[];
+    cols.forEach(c=>{const n=ch.filter(x=>x.dataset.d===c.dataset.d).length;c.style.setProperty('--h',H[n]*100+'%');c.classList.toggle('weak',n>0);
+      const r=$('i',c).getBoundingClientRect(),colBox=c.getBoundingClientRect();pts.push({x:r.left+r.width/2-box.left,y:colBox.bottom-box.top-colBox.height*H[n]})});
+    const L=pts[0],R=pts[2],M=pts[1],ang=Math.atan2(R.y-L.y,R.x-L.x)*180/Math.PI,mid=(L.y+R.y)/2,top=Math.min(mid,M.y);
+    mt.style.setProperty('--tilt',ang.toFixed(2)+'deg');mt.style.setProperty('--by',(top-14)+'px');mt.classList.toggle('shaky',Math.abs(ang)>1||ch.length>=4)};
+  addEventListener('resize',()=>drawTemple($$('.q input:checked')));
   const score=()=>{
     const ch=$$('.q input:checked'),n=ch.length,l=n===0?0:n<=2?1:n<=4?2:3,bf=$('#befund');
     bf.dataset.l=l;bf.style.setProperty('--lc',LC[l]);$('#sc').textContent=n;
     $$('#meter i').forEach((m,i)=>m.classList.toggle('on',i<n));
-    $$('.dim-row').forEach(r=>{const c=ch.filter(x=>x.dataset.d===r.dataset.d).length;$$('i',r).forEach((m,i)=>m.classList.toggle('on',i<c))});
+    drawTemple(ch);
     const v=$('#verdict');
     if(!n){v.innerHTML='<h3>Noch alles ruhig.</h3><p>Hake ab, was Dir bekannt vorkommt.</p>';return}
     const cnt={};ch.forEach(c=>cnt[c.dataset.k]=(cnt[c.dataset.k]||0)+1);

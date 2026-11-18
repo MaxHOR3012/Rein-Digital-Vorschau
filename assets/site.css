@@ -674,3 +674,35 @@ body.menu-open .talk-fab{display:none}
 .about .eyebrow,.steam .eyebrow{color:var(--bg)}
 .about .eyebrow::before,.steam .eyebrow::before{background:var(--blue-l)}
 .about h2{font-size:clamp(2rem,3.3vw,3.1rem);line-height:1.05}
+
+/* Befund (modern): dark card with three mini pillars */
+.befund{background:var(--navy-d);color:var(--bg);border:0;box-shadow:0 34px 60px -24px rgba(14,27,46,.55);padding:30px 32px}
+.befund[data-l]{background:var(--navy-d)}
+.befund .mono{color:var(--blue-l)}
+.befund .b-score small{color:rgba(246,247,249,.45)}
+.befund .meter{display:none}
+.befund .meter i{background:rgba(246,247,249,.14)}
+.mt{position:relative;height:210px;margin:22px 0 6px}
+.mt-cols{position:absolute;left:0;right:0;top:30px;bottom:34px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:0 8%}
+.mt-col{position:relative;display:flex;align-items:flex-end;justify-content:center}
+.mt-col i{display:block;width:46%;height:var(--h,100%);background:var(--c);transition:height .7s cubic-bezier(.5,0,.2,1),background .4s}
+.mt-col.weak i{background:repeating-linear-gradient(-45deg,#E2603F 0 6px,#C9492C 6px 12px)}
+.mt-col span{position:absolute;bottom:-28px;left:50%;transform:translateX(-50%);font-family:var(--f-mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(246,247,249,.6);white-space:nowrap}
+.mt-col.weak span{color:#F09A80}
+.mt-beam{position:absolute;left:4%;right:4%;height:14px;top:var(--by,16px);background:var(--bg);transform:rotate(var(--tilt,0deg));transform-origin:50% 100%;transition:top .7s cubic-bezier(.5,0,.2,1),transform .7s cubic-bezier(.5,0,.2,1);display:flex;align-items:center;justify-content:center}
+.mt-beam span{font-family:var(--f-mono);font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:var(--navy-d)}
+.mt.shaky .mt-beam{animation:wobble 2.4s ease-in-out infinite}
+@keyframes wobble{50%{transform:rotate(calc(var(--tilt,0deg) + .8deg))}}
+.mt-base{position:absolute;left:0;right:0;bottom:32px;height:3px;background:rgba(246,247,249,.25)}
+.befund .verdict{border-top:1px solid var(--line-l);margin-top:14px}
+.befund .verdict h3{color:#fff}
+.befund .verdict p{color:rgba(246,247,249,.72)}
+.befund .verdict p strong{color:#fff}
+.befund .verdict a{color:var(--blue-l)}
+.befund .note{color:rgba(246,247,249,.45)}
+@media (max-width:900px){
+  .befund{box-shadow:0 14px 30px -10px rgba(14,27,46,.5);padding:14px 16px}
+  .befund .meter{display:grid}
+  .mt{display:none}
+  .befund .verdict{border-top:0;margin-top:0}
+}

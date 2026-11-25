@@ -6,8 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dr. Andreas Rein – Organisationsgestalter für Struktur, Haltung und Wirksamkeit</title>
 <meta name="description" content="Methoden und Strukturen wirken erst, wenn der Mensch dahinter mitgedacht wird. Dr. Andreas Rein – Organisationsgestalter, Flow Maker, haltungsbasierte Organisationsentwicklung (HBO).">
-<link rel="stylesheet" href="assets/fonts.css?v=58">
-<link rel="stylesheet" href="assets/site.css?v=58">
+<link rel="stylesheet" href="assets/fonts.css?v=60">
+<link rel="stylesheet" href="assets/site.css?v=60">
 </head>
 <body>
 
@@ -354,17 +354,15 @@
     </div>
   </div>
   <div class="wrap">
-    <form class="contact rv" id="contact" novalidate>
+    <div class="contact rv" id="contact" data-form="xVJkvy">
       <div class="contact-head"><h3>Lieber schreiben?</h3><p>Schick mir ein paar Zeilen – ich melde mich persönlich.</p></div>
-      <div class="contact-fields">
-        <label>Name*<input type="text" name="name" autocomplete="name" required></label>
-        <label>E-Mail*<input type="email" name="email" autocomplete="email" required></label>
-        <label class="full">Worum geht es?*<textarea name="message" rows="4" placeholder="Ein, zwei Sätze reichen völlig." required></textarea></label>
-        <label class="consent full"><input type="checkbox" name="ok"><span>Ich habe die <a href="datenschutz.html">Datenschutzhinweise</a> gelesen und bin einverstanden, dass meine Angaben zur Beantwortung meiner Anfrage verarbeitet werden.</span></label>
-        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
-        <div class="full contact-foot"><button class="btn primary" type="submit">Nachricht senden <span class="arr">→</span></button><p class="contact-msg" aria-live="polite"></p></div>
+      <div class="contact-box">
+        <div class="contact-gate">
+          <button class="btn primary" type="button" id="formLoad">Formular laden <span class="arr">→</span></button>
+          <p class="cal-note">Das Formular wird über Tally (Belgien, Daten in der EU) bereitgestellt und erst nach dem Klick geladen. Mehr dazu in den <a href="datenschutz.html">Datenschutzhinweisen</a>. Lieber direkt per E-Mail? <a href="mailto:arein@rein-digital.com">arein@rein-digital.com</a></p>
+        </div>
       </div>
-    </form>
+    </div>
   </div>
 </section>
 </main>
@@ -380,6 +378,6 @@
   </div>
 </footer>
 <a class="talk-fab" href="index.html#termin" aria-label="Erstgespräch vereinbaren"><img src="assets/img/p2.jpg" alt=""><span>Erstgespräch</span></a>
-<script src="assets/site.js?v=58"></script>
+<script src="assets/site.js?v=60"></script>
 </body>
 </html>

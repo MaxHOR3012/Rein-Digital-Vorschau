@@ -116,21 +116,21 @@ if(cal){const load=()=>{if(cal.classList.contains('loaded'))return;cal.classList
   try{if(sessionStorage.getItem('rd-cal'))load()}catch(e){}
 }
 
-/* ---- contact form ----
-   Live: set KEY to the Web3Forms access key (web3forms.com, free) – mails then go straight to Andreas.
-   Without a key the form opens the visitor's mail program with the message prefilled. */
+/* ---- contact form (Tally, two-click) ----
+   Nothing is loaded from Tally until the visitor clicks; the choice is remembered for the tab (sessionStorage rd-form).
+   Tally's own embed script then loads the form and keeps the iframe as tall as the form. */
 const cf=$('#contact');
-if(cf){const KEY='', TO='arein@rein-digital.com', msg=$('.contact-msg',cf);
-  cf.onsubmit=async e=>{e.preventDefault();const fd=new FormData(cf);
-    if(fd.get('botcheck'))return;
-    if(!fd.get('name').trim()||!/^\S+@\S+\.\S+$/.test(fd.get('email'))||!fd.get('message').trim()){msg.textContent='Bitte Name, gültige E-Mail und Dein Anliegen ausfüllen.';msg.className='contact-msg err';return}
-    if(!fd.get('ok')){msg.textContent='Bitte bestätige noch die Datenschutzhinweise.';msg.className='contact-msg err';return}
-    if(!KEY){location.href='mailto:'+TO+'?subject='+encodeURIComponent('Anfrage über die Website – '+fd.get('name'))+'&body='+encodeURIComponent(fd.get('message')+'\n\n'+fd.get('name')+'\n'+fd.get('email'));msg.textContent='Dein Mailprogramm öffnet sich mit Deiner Nachricht.';msg.className='contact-msg ok';return}
-    msg.textContent='Wird gesendet …';msg.className='contact-msg';
-    try{const r=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({access_key:KEY,subject:'Anfrage über rein-digital.com',from_name:fd.get('name'),name:fd.get('name'),email:fd.get('email'),message:fd.get('message')})});
-      const j=await r.json();if(!j.success)throw 0;cf.reset();msg.textContent='Danke! Deine Nachricht ist angekommen. Ich melde mich persönlich.';msg.className='contact-msg ok'}
-    catch(err){msg.innerHTML='Das hat nicht geklappt. Schreib mir gern direkt: <a href="mailto:'+TO+'">'+TO+'</a>';msg.className='contact-msg err'}
-  };
+if(cf){const box=$('.contact-box',cf), id=cf.dataset.form;
+  const load=()=>{if($('iframe',box))return;
+    const f=document.createElement('iframe');
+    f.dataset.tallySrc='https://tally.so/embed/'+id+'?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1';
+    f.title='Kontaktformular';f.className='contact-frame';f.setAttribute('frameborder','0');
+    box.innerHTML='';box.appendChild(f);try{sessionStorage.setItem('rd-form','1')}catch(e){}
+    const go=()=>window.Tally?Tally.loadEmbeds():(f.src=f.dataset.tallySrc);
+    if(window.Tally)return go();
+    const s=document.createElement('script');s.src='https://tally.so/widgets/embed.js';s.onload=go;s.onerror=go;document.body.appendChild(s)};
+  $('#formLoad',cf).onclick=load;
+  try{if(sessionStorage.getItem('rd-form'))load()}catch(e){}
 }
 
 /* ---- reveal ---- */
